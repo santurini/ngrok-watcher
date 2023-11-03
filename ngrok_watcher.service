@@ -1,0 +1,8 @@
+[Unit]
+Description=Loop which uploads Ngrok URL to GitLab repo
+
+[Service]
+ExecStart=/home/aghinassi/ngrok_watcher/main.sh
+
+[Install]
+WantedBy=default.target
