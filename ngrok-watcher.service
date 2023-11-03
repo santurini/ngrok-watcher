@@ -1,8 +1,8 @@
 [Unit]
-Description=Loop which uploads Ngrok URL to GitLab repo
+Description=watching ngrok tunnel
 
 [Service]
-ExecStart=/home/aghinassi/ngrok_watcher/main.sh
+ExecStart=/home/aghinassi/ngrok-watcher/main.sh
 
 [Install]
 WantedBy=default.target
