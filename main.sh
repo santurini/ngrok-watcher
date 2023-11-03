@@ -9,17 +9,18 @@ cd $SCRIPT_DIR
 
 URL_FILE=README.md
 
-if [ -e "$URL_FILE" ]; then
-    rm "$URL_FILE" && touch "$URL_FILE"
-else
-    touch "$URL_FILE"               
-fi
-
 while true ; do
     OLD_URL=$(cat "$URL_FILE")
     NGROK_URL="$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[].public_url' | sort )"
 
     if [ "$NGROK_URL" != "$OLD_URL" ] ; then
+        
+        if [ -e "$URL_FILE" ]; then
+            rm "$URL_FILE" && touch "$URL_FILE"
+        else
+            touch "$URL_FILE"               
+        fi
+        
         echo "# Current URL" >> "$URL_FILE"
         echo "\`\`\`" >> "$URL_FILE"
         echo "$NGROK_URL" >> "$URL_FILE"
@@ -27,6 +28,7 @@ while true ; do
         git add "$URL_FILE"
         git commit -m "updated - $(date)"
         git push
+        
     fi
 
     sleep 300
