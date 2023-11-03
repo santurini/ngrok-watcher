@@ -14,7 +14,7 @@ while true ; do
     NGROK_URL="$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[].public_url' | sort )"
 
     if [ "$NGROK_URL" != "$OLD_URL" ] ; then
-        echo "# Current URL \n ``` \n "$NGROK_URL" \n ```" > "$URL_FILE"
+        echo "# Current URL \n\`\`\`\n"$NGROK_URL"\n\`\`\`"
         git add "$URL_FILE"
         git commit -m "new url - $(date)"
         git push
