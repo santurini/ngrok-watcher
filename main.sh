@@ -25,7 +25,7 @@ while true ; do
         echo "$NGROK_URL" >> "$URL_FILE"
         echo "\`\`\`" >> "$URL_FILE"
         git add "$URL_FILE"
-        git commit -m "new url - $(date)"
+        git commit -m "updated - $(date)"
         git push
     fi
 
