@@ -1,5 +1,5 @@
 [Unit]
-Description=watching ngrok tunnel
+Description=ngrok watcher
 
 [Service]
 ExecStart=/home/aghinassi/ngrok-watcher/main.sh
