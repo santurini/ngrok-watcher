@@ -13,24 +13,24 @@ while true ; do
     OLD_URL=$(cat "$URL_FILE")
     NGROK_URL="$(curl -s localhost:4040/api/tunnels | jq -r '.tunnels[].public_url' | sort )"
 
-    if [ "$NGROK_URL" != "$OLD_URL" ] ; then
-        
-        if [ -e "$URL_FILE" ]; then
-            rm "$URL_FILE" && touch "$URL_FILE"
-        else
-            touch "$URL_FILE"               
-        fi
-        
-        echo "# Current URL" >> "$URL_FILE"
-        echo "\`\`\`" >> "$URL_FILE"
-        echo "$NGROK_URL" >> "$URL_FILE"
-        echo "\`\`\`" >> "$URL_FILE"
+    if [ -e "$URL_FILE" ]; then
+        rm "$URL_FILE" && touch "$URL_FILE"
+    else
+        touch "$URL_FILE"               
+    fi
+    
+    echo "# Current URL" >> "$URL_FILE"
+    echo "\`\`\`" >> "$URL_FILE"
+    echo "$NGROK_URL" >> "$URL_FILE"
+    echo "\`\`\`" >> "$URL_FILE"
+
+    NEW_URL=$(cat "$URL_FILE")
+    
+    if [ "$NEW_URL" != "$OLD_URL" ] ; then        
         git add "$URL_FILE"
         git commit -m "updated - $(date)"
-        git push
-        
+        git push       
     fi
 
     sleep 300
-
 done
