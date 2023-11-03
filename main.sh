@@ -7,7 +7,7 @@ set -x
 SCRIPT_DIR=$(dirname $(realpath $0))
 cd $SCRIPT_DIR
 
-URL_FILE=ngrok_url.txt
+URL_FILE=ngrok-url.txt
 
 while true ; do
     OLD_URL=$(cat "$URL_FILE")
